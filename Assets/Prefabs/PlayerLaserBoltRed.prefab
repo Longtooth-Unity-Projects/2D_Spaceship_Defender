@@ -137,3 +137,4 @@ MonoBehaviour:
   damage: 1
   speed: 20
   fireDelay: 0.15
+  fireClip: {fileID: 8300000, guid: 4cda78b326846d343aab4ba22f03659a, type: 3}

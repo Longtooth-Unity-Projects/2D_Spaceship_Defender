@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject weaponPrefab_1;
     [SerializeField] GameObject explosionVFX;
     [SerializeField] float explosionDuration = 1f;
+    [SerializeField] AudioClip destructionClip;
+    [SerializeField] [Range(0, 1)] float weaponVolumeLevel = 0.1f;
+    [SerializeField] [Range(0, 1)] float destructionVolumeLevel = 0.5f;
 
     //TODO put these in the weapon
     [SerializeField] float shotCounter = 0;
@@ -50,6 +53,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             GameObject explosion = Instantiate(explosionVFX, transform.position, transform.rotation);
+            AudioSource.PlayClipAtPoint(destructionClip, Camera.main.transform.position, destructionVolumeLevel);
             Destroy(explosion, explosionDuration);
             Destroy(gameObject);
         }
@@ -60,7 +64,7 @@ public class Enemy : MonoBehaviour
         shotCounter -= Time.deltaTime;
         if (shotCounter <= 0)
         {
-            weapon_1.Fire(transform.position, ProjectileDirection.Down);
+            weapon_1.Fire(transform.position, ProjectileDirection.Down, weaponVolumeLevel);
             shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetwenShots);
         }
     }

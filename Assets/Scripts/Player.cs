@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float xPadding = 0.5f;
     [SerializeField] private float yPadding = 0.5f;
+    [SerializeField] [Range(0,1)] float weaponVolumeLevel = 0.1f;
+    [SerializeField] [Range(0, 1)] float destructionVolumeLevel = 0.5f;
+    [SerializeField] private AudioClip destructionClip;
+
 
     [Header("Weapon Data")]
     [SerializeField] private GameObject weaponPrefab_1;
@@ -92,8 +96,8 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            weapon.Fire(transform.position, ProjectileDirection.Up);
-           yield return new WaitForSeconds(weapon.GetFireDelay());
+            weapon.Fire(transform.position, ProjectileDirection.Up, weaponVolumeLevel);
+            yield return new WaitForSeconds(weapon.GetFireDelay());
             ;
         }
     }
@@ -112,6 +116,7 @@ public class Player : MonoBehaviour
         damageDealer.Hit();
         if (health <= 0)
         {
+            AudioSource.PlayClipAtPoint(destructionClip, Camera.main.transform.position, destructionVolumeLevel);
             Destroy(gameObject);
         }
     }
