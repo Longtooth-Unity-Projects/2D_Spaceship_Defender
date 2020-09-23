@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     int projectileDirection = -1;
 
     //cached references
-    private DamageDealer weapon_1;  //TODO make this an array of weapons and fire them all
+    private DamageDealerWeapon weapon_1;  //TODO make this an array of weapons and fire them all
 
 
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetwenShots);
 
-        weapon_1 = weaponPrefab_1.GetComponent<DamageDealer>();;
+        weapon_1 = weaponPrefab_1.GetComponent<DamageDealerWeapon>();;
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
 
     private void ProcessDamage(DamageDealer damageDealer)
     {
-        health -= damageDealer.GetDamage();
+        health -= damageDealer.Damage;
         damageDealer.Hit();
         if (health <= 0)
         {

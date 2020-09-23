@@ -138,8 +138,11 @@ MonoBehaviour:
   moveSpeed: 10
   xPadding: 0.5
   yPadding: 0.5
-  volumeLevel: 1
+  weaponVolumeLevel: 0.1
+  destructionVolumeLevel: 0.5
   destructionClip: {fileID: 8300000, guid: 03b2a8aa13bc7ca40ade8a69a74b68cd, type: 3}
+  explosionVFX: {fileID: 8980214401199615134, guid: 11209187dfe301e4ba21cc64ef2a960c, type: 3}
+  explosionDuration: 1
   weaponPrefab_1: {fileID: 3631862781460585127, guid: d70aedeb7039f504b8fd82edff14cdc4, type: 3}
 --- !u!82 &6153597245628852578
 AudioSource:

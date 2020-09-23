@@ -8,16 +8,21 @@ using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
+    //actions events
+    public static Action PlayerDestroyed;
+
+
     //configuration parameters
     [Header("Player Data")]
-    [SerializeField] private int health = 10;
+    [SerializeField] private int health = 1;
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float xPadding = 0.5f;
     [SerializeField] private float yPadding = 0.5f;
     [SerializeField] [Range(0,1)] float weaponVolumeLevel = 0.1f;
     [SerializeField] [Range(0, 1)] float destructionVolumeLevel = 0.5f;
     [SerializeField] private AudioClip destructionClip;
-
+    [SerializeField] GameObject explosionVFX;
+    [SerializeField] float explosionDuration = 1f;
 
     [Header("Weapon Data")]
     [SerializeField] private GameObject weaponPrefab_1;
@@ -32,7 +37,7 @@ public class Player : MonoBehaviour
     private Vector2 newPosition = new Vector2(0, 0);
 
     // cached references
-    private DamageDealer weapon_1;
+    private DamageDealerWeapon weapon_1;
 
     // Start is called before the first frame update
     void Start()
@@ -61,9 +66,9 @@ public class Player : MonoBehaviour
         moveYmax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - yPadding;
     }
 
-    private void SetUpWeapon(ref DamageDealer weaponToSet, GameObject weaponPrefab)
+    private void SetUpWeapon(ref DamageDealerWeapon weaponToSet, GameObject weaponPrefab)
     {
-        weaponToSet = weaponPrefab.GetComponent<DamageDealer>();
+        weaponToSet = weaponPrefab.GetComponent<DamageDealerWeapon>();
         // TODO figure out a way to use relative position
         //weaponToSet.Position = transform.position;
     }
@@ -92,7 +97,7 @@ public class Player : MonoBehaviour
     }
 
     //*************Coroutines****************
-    IEnumerator FireContinuously(DamageDealer weapon)  //TODO see if we can move continuous fire to the weapon
+    IEnumerator FireContinuously(DamageDealerWeapon weapon)  //TODO see if we can move continuous fire to the weapon
     {
         while (true)
         {
@@ -112,12 +117,21 @@ public class Player : MonoBehaviour
     // TODO possibly change this to a "damagtaker" class
     private void ProcessDamage(DamageDealer damageDealer)
     {
-        health -= damageDealer.GetDamage();
+        health -= damageDealer.Damage;
         damageDealer.Hit();
         if (health <= 0)
         {
-            AudioSource.PlayClipAtPoint(destructionClip, Camera.main.transform.position, destructionVolumeLevel);
-            Destroy(gameObject);
+            ProcessDestruction();
         }
     }
+
+    private void ProcessDestruction()
+    {
+        GameObject explosion = Instantiate(explosionVFX, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(destructionClip, Camera.main.transform.position, destructionVolumeLevel);
+        Destroy(explosion, explosionDuration);
+        PlayerDestroyed?.Invoke();
+        Destroy(gameObject);
+    }
+
 }//end of class player

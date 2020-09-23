@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
+    [SerializeField] protected int damage = 1;
+
+    public int Damage => damage;
+
+    public void Hit()
+    {
+        Destroy(gameObject);
+    }
+}
+
+
+/*
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DamageDealer : MonoBehaviour
+{
     [SerializeField] int damage = 1;
     [SerializeField] private float speed = 20f;
     [SerializeField] private float fireDelay = 0.15f; //10 rounds per second
@@ -18,11 +37,11 @@ public class DamageDealer : MonoBehaviour
     public AudioClip GetFireClip() { return fireClip; }
 
 
-    
+
     public void Fire(Vector3 weaponLocation, ProjectileDirection direction, float volumeLevel)
     {
         GameObject projectile = Instantiate(gameObject, weaponLocation, Quaternion.identity);
-        projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed * (int) direction);
+        projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed * (int)direction);
         AudioSource.PlayClipAtPoint(fireClip, Camera.main.transform.position, volumeLevel);
     }
 
@@ -31,3 +50,4 @@ public class DamageDealer : MonoBehaviour
         Destroy(gameObject);
     }
 }
+*/
