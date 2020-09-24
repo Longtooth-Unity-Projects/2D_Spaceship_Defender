@@ -23,13 +23,14 @@ public class LevelManager : MonoBehaviour
     {
         //add listeners
         Player.PlayerDestroyed += PlayerDestroyed;
+        Enemy.Destroyed += EnemyDestroyed;
     }
 
     private void Start()
     {
         sceneLoader = GameObject.FindObjectOfType<SceneLoader>();
         gameManager = GameObject.FindObjectOfType<GameManagerSingleton>();
-        CurrentScore = gameManager.PlayerScore;
+        CurrentScore = gameManager.GetPlayerScore();
         ScoreUpdate?.Invoke(CurrentScore);
     }
 
@@ -37,9 +38,8 @@ public class LevelManager : MonoBehaviour
     {
         //remove listeners
         Player.PlayerDestroyed -= PlayerDestroyed;
-
-        //update score
-        gameManager.PlayerScore = CurrentScore;
+        Enemy.Destroyed -= EnemyDestroyed;
+        ScoreUpdate?.Invoke(CurrentScore);
     }
 
     

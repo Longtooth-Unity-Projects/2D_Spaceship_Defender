@@ -11,7 +11,7 @@ public class GameOverCanvas : MonoBehaviour
     {
         if (scoreText)
         {
-            scoreText.text = GameObject.FindObjectOfType<GameManagerSingleton>().PlayerScore.ToString();
+            scoreText.text = GameObject.FindObjectOfType<GameManagerSingleton>().GetPlayerScore().ToString();
         }
     }
 }

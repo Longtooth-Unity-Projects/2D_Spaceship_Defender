@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManagerSingleton : MonoBehaviour
 {
-    public int PlayerScore { get; set; }
+    private int _playerScore;
 
 
 
@@ -23,28 +23,27 @@ public class GameManagerSingleton : MonoBehaviour
 
     private void OnEnable()
     {
-        //register listeners
+        LevelManager.ScoreUpdate += SetPlayerScore;
     }
 
-    private void OnDisable()
-    {
-        //deregister listeners
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerScore = 0;
+        _playerScore = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        LevelManager.ScoreUpdate -= SetPlayerScore;
     }
+
 
     public void ResetGame()
     {
-        Destroy(gameObject);
+        _playerScore = 0;
     }
+
+    public int GetPlayerScore() { return _playerScore; }
+    public void SetPlayerScore(int value) { _playerScore = value; }
 }

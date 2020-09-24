@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(waveConfig.EnemyPrefab, waypoints[0].transform.position, Quaternion.identity);
             newEnemy.GetComponent<EnemyPathing>().WaveConfig = waveConfig;
-            yield return new WaitForSeconds(waveConfig.TimeBetweenSpawns);
+            yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
         }
 
     }

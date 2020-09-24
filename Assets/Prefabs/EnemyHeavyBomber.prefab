@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -4934641587047488965}
   - component: {fileID: -3159487930062861963}
   m_Layer: 10
-  m_Name: EnemyHeavyFighter
+  m_Name: EnemyHeavyBomber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cda4dee4871b6fc439541c54dafa7a50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78b0ea1ea7639da4b948995002a25761, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112,17 +112,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fa531dc89c38d45b658df2f509b4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 5
   scoreValue: 1
-  weaponPrefab_1: {fileID: 3631862781460585127, guid: 1f767922b448e2a46a6cc008c940fe61, type: 3}
+  spawnDelay: 1
+  weaponPrefab_1: {fileID: 3631862781460585127, guid: 21c41418061ff694fbfe570c78ba42bf, type: 3}
+  shotCounter: 0
+  minTimeBetweenShots: 0.5
+  maxTimeBetwenShots: 3
   explosionVFX: {fileID: 8980214401199615134, guid: 11209187dfe301e4ba21cc64ef2a960c, type: 3}
   explosionDuration: 1
   destructionClip: {fileID: 8300000, guid: 03b2a8aa13bc7ca40ade8a69a74b68cd, type: 3}
   weaponVolumeLevel: 0.1
   destructionVolumeLevel: 0.5
-  shotCounter: 0
-  minTimeBetweenShots: 0.2
-  maxTimeBetwenShots: 3
 --- !u!60 &8635006567497076146
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -140,7 +141,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.93, y: 0.84}
+    oldSize: {x: 1.64, y: 1.68}
     newSize: {x: 0.09, y: 0.57}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -148,12 +149,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.30250198, y: 0.4201393}
-      - {x: 0.298878, y: 0.42589188}
-      - {x: 0.47650537, y: 0.15990768}
-      - {x: 0.24969003, y: -0.42696857}
-      - {x: -0.25695917, y: -0.42695272}
-      - {x: -0.4825758, y: 0.16200548}
+    - - {x: 0.38163924, y: 0.8554475}
+      - {x: -0.3514312, y: 0.8441915}
+      - {x: -0.81533766, y: 0.5795394}
+      - {x: -0.8209362, y: -0.3965427}
+      - {x: -0.16310382, y: -0.78303444}
+      - {x: 0.21506882, y: -0.78620344}
+      - {x: 0.82486564, y: -0.39367026}
+      - {x: 0.8271638, y: 0.58395934}
 --- !u!82 &-6798025343478548964
 AudioSource:
   m_ObjectHideFlags: 0

@@ -652,3 +652,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1541743014}
+  healthText: {fileID: 367182221}

@@ -10,11 +10,12 @@ public class Player : MonoBehaviour
 {
     //actions events
     public static Action PlayerDestroyed;
+    public static Action<int> HealthUpdated;
 
 
     //configuration parameters
     [Header("Player Data")]
-    [SerializeField] private int health = 1;
+    [SerializeField] private int health = 10;
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float xPadding = 0.5f;
     [SerializeField] private float yPadding = 0.5f;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
     {
         SetUpMoveBoundaries();
         SetUpWeapon(ref weapon_1, weaponPrefab_1);
+        HealthUpdated?.Invoke(health);
     }
 
 
@@ -118,6 +120,7 @@ public class Player : MonoBehaviour
     private void ProcessDamage(DamageDealer damageDealer)
     {
         health -= damageDealer.Damage;
+        HealthUpdated?.Invoke(health);
         damageDealer.Hit();
         if (health <= 0)
         {

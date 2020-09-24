@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageDealerWeapon : DamageDealer
 {
     [SerializeField] private float speed = 20f;
-    [SerializeField] private float fireDelay = 0.15f; //10 rounds per second
+    [SerializeField] private float fireDelay = 0.15f; // 15 rounds per second
     [SerializeField] AudioClip fireClip;
 
     public Vector3 Position { get; set; }
