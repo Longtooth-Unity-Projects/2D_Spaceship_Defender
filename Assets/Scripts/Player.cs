@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
         //weaponToSet.Position = transform.position;
     }
 
+    //TODO update this to new input system
     private void PlayerMove()
     {
         deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;

@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] List<WaveConfiguration> waveConfigurations;
     [SerializeField] int startingWave = 0;
-    [SerializeField] bool bIsLooping = false;
+    [SerializeField] bool bIsLooping = true;
 
 
     // Start is called before the first frame update
